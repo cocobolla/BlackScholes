@@ -28,6 +28,22 @@ std::string Date::to_str() {
 	return ss.str();
 }
 
+bool Date::operator>(Date d) {
+	int diff = (*this).daysFrom(d);
+	if (diff < 0)
+		return true;
+	else
+		return false;
+}
+
+bool Date::operator<(Date d) {
+	int diff = (*this).daysFrom(d);
+	if (diff < 0)
+		return false;
+	else
+		return true;
+}
+
 int daysBetween(Date d1, Date d2) {
 	return d1.daysFrom(d2);
 }

@@ -14,6 +14,8 @@ public:
 
 	void print();
 	std::string to_str();
+	bool operator> (const Date d);
+	bool operator< (const Date d);
 private:
 	int y_, m_, d_;
 };
