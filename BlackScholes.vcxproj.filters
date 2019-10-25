@@ -33,6 +33,12 @@
     <ClCompile Include="plainvanilla_option.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="term_structure.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="yield_term_structure.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binary_option.h">
@@ -54,6 +60,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="plainvanilla_option.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="term_structure.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="yield_term_structure.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

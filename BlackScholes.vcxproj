@@ -129,6 +129,8 @@
     <ClCompile Include="normal.cpp" />
     <ClCompile Include="option.cpp" />
     <ClCompile Include="plainvanilla_option.cpp" />
+    <ClCompile Include="term_structure.cpp" />
+    <ClCompile Include="yield_term_structure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binary_option.h" />
@@ -138,6 +140,8 @@
     <ClInclude Include="option.h" />
     <ClInclude Include="payoff.h" />
     <ClInclude Include="plainvanilla_option.h" />
+    <ClInclude Include="term_structure.h" />
+    <ClInclude Include="yield_term_structure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
