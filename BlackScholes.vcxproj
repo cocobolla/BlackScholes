@@ -128,6 +128,7 @@
     <ClCompile Include="main_class.cpp" />
     <ClCompile Include="normal.cpp" />
     <ClCompile Include="option.cpp" />
+    <ClCompile Include="option_portfolio.cpp" />
     <ClCompile Include="plainvanilla_option.cpp" />
     <ClCompile Include="term_structure.cpp" />
   </ItemGroup>
@@ -137,6 +138,8 @@
     <ClInclude Include="GBMProcess.h" />
     <ClInclude Include="normal.h" />
     <ClInclude Include="option.h" />
+    <ClInclude Include="option_factory.h" />
+    <ClInclude Include="option_portfolio.h" />
     <ClInclude Include="payoff.h" />
     <ClInclude Include="plainvanilla_option.h" />
     <ClInclude Include="term_structure.h" />

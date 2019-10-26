@@ -5,6 +5,7 @@
 #include "payoff.h"
 
 enum OptionType { Call = 1, Put = -1 };
+enum OptionProduct { Binary = 0, Vanila = 1 };
 
 class Option {
 public:
@@ -21,8 +22,6 @@ public:
 	virtual double impliedVol(double m) { return 10; }
 
 	// Assignment.2
-	double getT() { return t_; }
-	void setT(double t) { t_ = t; }
 	virtual double vega();
 	virtual double delta();
 	virtual double gamma();
@@ -40,4 +39,11 @@ protected:
 	OptionType type_;
 	GBMProcess p_;
 	double s_, r_, q_, t_, sigma_;
+};
+
+struct MarketOption{
+	Option* option;
+	GBMProcess gbm;
+	Date eval_date;
+	int quantity;
 };

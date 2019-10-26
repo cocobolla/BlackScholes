@@ -48,6 +48,7 @@ double TermStructure::value(Date d) {
 	return inter_rate;
 }
 
+// Where to use?
 double YieldTermStructure::discount(Date d) {
 	Date start_date = getDates().front();
 	double t = daysBetween(start_date, d);
@@ -57,6 +58,7 @@ double YieldTermStructure::discount(Date d) {
 	return df;
 }
 
+// Where to use?
 double YieldTermStructure::forward(Date d1, Date d2) {
 	double t = daysBetween(d1, d2);
 	double forward_rate = 365 / t * 
@@ -64,7 +66,13 @@ double YieldTermStructure::forward(Date d1, Date d2) {
 	return forward_rate;
 }
 
-//TODO: What is the Time volatility
+// Where to use?
+//TODO: Is the equation right?
 double VolatilityTermStructure::variance(Date d) {
-	return 1.2;
+	Date start_date = getDates().front();
+	double t = daysBetween(start_date, d);
+	double v = value(d);
+
+	double variance = (t / 365) * v;
+	return variance;
 }

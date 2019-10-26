@@ -63,49 +63,41 @@ double Option::bntprice(unsigned int nsteps) {
 
 // Assignment.2
 double Option::vega() {
-	GBMProcess original_gbm = p_;
-	double v = original_gbm.getVol();
+	double v = sigma_;
 	double v1 = v + 0.01;
 	double v2 = v - 0.01;
 
 	//TODO: it is better to Encapsulate Change process and Reset process
 	// Get P(sigma + 0.01)
-	GBMProcess temp_gbm = original_gbm;
-	temp_gbm.setVol(v1);
-	setProcess(temp_gbm);
+	sigma_ = v1;
 	double p1 = price();
 
 	// Get P(sigma - 0.01)
-	temp_gbm.setVol(v2);
-	setProcess(temp_gbm);
+	sigma_ = v2;
 	double p2 = price();
 
 	// Reset original GBM
-	setProcess(original_gbm);
+	sigma_ = v;  // or setProcess(p_);
 
 	double vega = (p1 - p2) / 0.02;
 	return vega;
 }
 
 double Option::delta() {
-	GBMProcess original_gbm = p_;
-	double s = original_gbm.getSpot();
+	double s = s_;
 	double s1 = s * 1.01;
 	double s2 = s * 0.99;
 
 	// Get P(1.01 * S)
-	GBMProcess temp_gbm = original_gbm;
-	temp_gbm.setSpot(s1);
-	setProcess(temp_gbm);
+	s_ = s1;
 	double p1 = price();
 
 	// Get P(0.99 * S)
-	temp_gbm.setSpot(s2);
-	setProcess(temp_gbm);
+	s_ = s2;
 	double p2 = price();
 
 	// Return to original GBM
-	setProcess(original_gbm);
+	s_ = s;  //or setProcess(p_);
 
 	double delta = (p1 - p2) / (0.02 * s);
 
@@ -113,66 +105,59 @@ double Option::delta() {
 }
 
 double Option::gamma() {
-	GBMProcess original_gbm = p_;
-	double s = original_gbm.getSpot();
+	double s = s_;
 	double s1 = s * 1.01;
 	double s2 = s * 0.99;
 
 	// Get P(1.01 * S)
-	GBMProcess temp_gbm = original_gbm;
-	temp_gbm.setSpot(s1);
-	setProcess(temp_gbm);
+	s_ = s1;
 	double p1 = price();
 
 	// Get P(S)
-	temp_gbm.setSpot(s);
-	setProcess(temp_gbm);
+	s_ = s;
 	double p = price();
 
 	// Get P(0.99 * S)
-	temp_gbm.setSpot(s2);
-	setProcess(temp_gbm);
+	s_ = s2;
 	double p2 = price();
 
 	// Return to original GBM
-	setProcess(original_gbm);
+	s_ = s;  //or setProcess(p_);
 
 	double gamma = (p1- 2 * p + p2) / pow(0.01 * s, 2);
 	return gamma;
 }
 
 double Option::rho() {
-	GBMProcess original_gbm = p_;
-	double r = original_gbm.getRf();
+	double r = r_;
 	double r1 = r + 0.0001;
 	double r2 = r - 0.0001;
 
 	// Get P(r + 0.0001)
-	GBMProcess temp_gbm = original_gbm;
-	temp_gbm.setRf(r1);
-	setProcess(temp_gbm);
+	r_ = r1;
 	double p1 = price();
 
 	// Get P(r - 0.0001)
-	temp_gbm.setRf(r2);
-	setProcess(temp_gbm);
+	r_ = r2;
 	double p2 = price();
 
 	// Reset original GBM
-	setProcess(original_gbm);
+	r_ = r;  //or setProcess(p_);
 
 	double rho = (p1 - p2) / 0.0002;
 	return rho;
 }
 
 double Option::theta() {
-	double t = getT();
+	double t = t_;
 	double t1 = t - 0.0001;
-	setT(t1);
+
+	// Get P(t - 0.0001)
+	t_ = t1;
 	double p1 = price();
 
 	// Reset original t
-	setT(t);
+	t_ = t;
 	double p = price();
 
 	double theta = (p1 - p) / 0.0001;
