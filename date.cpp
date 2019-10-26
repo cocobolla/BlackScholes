@@ -38,10 +38,19 @@ bool Date::operator>(Date d) {
 
 bool Date::operator<(Date d) {
 	int diff = (*this).daysFrom(d);
-	if (diff < 0)
-		return false;
-	else
+	if (diff > 0)
 		return true;
+	else
+		return false;
+}
+
+bool Date::operator==(Date d) {
+	bool a = !(*this > d);
+	bool b = !(*this < d);
+	if ( !(*this > d) && !(*this < d) )
+		return true;
+	else
+		return false;
 }
 
 int daysBetween(Date d1, Date d2) {

@@ -13,7 +13,7 @@ void print_option(Option* x) {
 	std::cout << std::string(30, '-') << std::endl;
 }
 
-int main1() {
+int main2() {
 	Date evalDate(2019, 9, 1);
 	Date mat("20191031");
 	double spot = 100, stk = 100, rf = 0.01, div = 0.01, vol = 0.2;
@@ -33,7 +33,7 @@ int main1() {
 		delete inst[i];
 	return 0;
 }
-int main() {
+int main1() {
 	Date evalDate(2019, 9, 1);
 	Date mat1("20190930");
 	Date mat2("20190802");
@@ -69,5 +69,12 @@ int main() {
 	std::cout << x1 << std::endl;
 	std::cout << x2 << std::endl;
 
+	return 0;
+}
+
+int main() {
+	Date mat1("20190930");
+	Date mat2("20190901");
+	std::cout << (mat1 < mat2) << std::endl;
 	return 0;
 }

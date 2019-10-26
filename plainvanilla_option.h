@@ -26,6 +26,12 @@ public:
 	double vega();
 	double impliedVol(double mktPrice, double init = 0.1, double tol = 1e-6);
 
+	// Assignment.2
+	double delta();
+	double gamma();
+	double rho();
+	double theta();
+
 private:
 	void setVolatility(double sigma) {
 		sigma_ = sigma;

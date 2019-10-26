@@ -18,8 +18,16 @@ public:
 	virtual double price() = 0;
 	virtual double mcprice(unsigned int numOfSimulation);
 	virtual double bntprice(unsigned int nsteps);
-	virtual double vega() { return 1; }
 	virtual double impliedVol(double m) { return 10; }
+
+	// Assignment.2
+	double getT() { return t_; }
+	void setT(double t) { t_ = t; }
+	virtual double vega();
+	virtual double delta();
+	virtual double gamma();
+	virtual double rho();
+	virtual double theta();
 
 protected:
 	double getd1();

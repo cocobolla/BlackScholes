@@ -31,3 +31,15 @@ double PlainVanillaOption::impliedVol(double mktPrice, double init, double tol) 
 	return x;
 }
 
+double PlainVanillaOption::delta() {
+	return 1.2;
+}
+double PlainVanillaOption::gamma() {
+	return 1.2;
+}
+double PlainVanillaOption::rho() {
+	return 1.2;
+}
+double PlainVanillaOption::theta() {
+	return 1.2;
+}
