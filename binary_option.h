@@ -22,7 +22,8 @@ public:
 		payoff_ = new BinaryPayoff(strike, type);
 	}
 	~BinaryOption() { 
-		std::cout << "binary destruction" << std::endl; 
+		// std::cout << "binary destruction" << std::endl; 
 	}
 	double price();
+	void printInfo();
 };

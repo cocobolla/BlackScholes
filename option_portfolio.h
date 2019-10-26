@@ -22,6 +22,8 @@ public:
 	void pushOption(OptionProduct op, Position p, OptionType t,
 		double strike, Date expiration, int q = 1);
 	static void printOption(Option* x);
+	static void printOptionInfo(Option* x);
+	void calculate();
 	void printPortfolio();
 	~OptionPortfolio();
 
@@ -32,10 +34,26 @@ private:
 	double spot_;
 	Date eval_date_;
 
-	std::vector<Option*> option_arr;
-	std::vector<Position> position_arr;
-	std::vector<int> quantity_arr;
+	std::vector<Option*> option_arr_;
+	std::vector<Position> position_arr_;
+	std::vector<int> quantity_arr_;
 	OptionFactory factory_;
+
+	std::vector<double> price_arr_;
+	std::vector<double> mc_arr_;
+	std::vector<double> bnt_arr_;
+	std::vector<double> delta_arr_;
+	std::vector<double> gamma_arr_;
+	std::vector<double> vega_arr_;
+	std::vector<double> rho_arr_;
+	std::vector<double> theta_arr_;
+
+	double total_price_;
+	double total_delta_;
+	double total_gamma_;
+	double total_vega_;
+	double total_rho_;
+	double total_theta_;
 };
 
 

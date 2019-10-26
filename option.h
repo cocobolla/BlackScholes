@@ -22,6 +22,7 @@ public:
 	virtual double impliedVol(double m) { return 10; }
 
 	// Assignment.2
+	virtual void printInfo() = 0;
 	virtual double vega();
 	virtual double delta();
 	virtual double gamma();

@@ -27,6 +27,7 @@ public:
 	double impliedVol(double mktPrice, double init = 0.1, double tol = 1e-6);
 
 	// Assignment.2
+	void printInfo();
 	double delta();
 	double gamma();
 	double rho();

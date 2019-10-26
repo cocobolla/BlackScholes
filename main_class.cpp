@@ -83,6 +83,7 @@ int main3() {
 }
 
 int main() {
+	std::cout.precision(4);
 	double spot = 200;
 	Date eval_date(2019, 9, 30);
 
@@ -124,6 +125,8 @@ int main() {
 	portfolio.pushOption(Binary, Long, Put, 190, Date(2020,1,15), 20);
 	portfolio.pushOption(Binary, Short, Call, 205, Date(2020,2,15), 20);
 
+	// Assignment.3
+	portfolio.printPortfolio();
 
 	return 0;
 }

@@ -73,6 +73,6 @@ double VolatilityTermStructure::variance(Date d) {
 	double t = daysBetween(start_date, d);
 	double v = value(d);
 
-	double variance = (t / 365) * v;
+	double variance = (t / 365) * pow(v, 2);
 	return variance;
 }
