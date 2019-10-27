@@ -48,6 +48,16 @@ double TermStructure::value(Date d) {
 	return inter_rate;
 }
 
+void TermStructure::operator+=(double d) {
+	for (unsigned int i = 0; i < rates_.size(); i++)
+		rates_[i] += d;
+}
+
+void TermStructure::operator*=(double d) {
+	for (unsigned int i = 0; i < rates_.size(); i++)
+		rates_[i] += d;
+}
+
 // Where to use?
 double YieldTermStructure::discount(Date d) {
 	Date start_date = getDates().front();
@@ -76,3 +86,4 @@ double VolatilityTermStructure::variance(Date d) {
 	double variance = (t / 365) * pow(v, 2);
 	return variance;
 }
+

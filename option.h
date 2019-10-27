@@ -16,6 +16,7 @@ public:
 	}
 	void setProcess(GBMProcess p);
 	void setEvalDate(Date d);
+	Date getExpiration() { return expiration_; }
 	virtual double price() = 0;
 	virtual double mcprice(unsigned int numOfSimulation);
 	virtual double bntprice(unsigned int nsteps);

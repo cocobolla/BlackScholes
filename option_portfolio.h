@@ -6,6 +6,7 @@
 #include "option_factory.h"
 
 enum Position { Long = 1, Short = -1 };
+enum Caltype { Add = 0, Mul = 1 };
 
 class OptionPortfolio
 {
@@ -17,14 +18,23 @@ public:
 		:y_term_(y_term), v_term_(v_term), d_term_(d_term), 
 			spot_(spot), eval_date_(eval_date) {}
 
-	// void putOption(Option* op, GBMProcess gbm, Date eval_date, Position p = Long, int q = 1);
-	// void putOption(Option* op, Position p = Long, int q = 1);
 	void pushOption(OptionProduct op, Position p, OptionType t,
 		double strike, Date expiration, int q = 1);
 	static void printOption(Option* x);
-	static void printOptionInfo(Option* x);
+	void initialize();
 	void calculate();
+	void calculate(int num);
 	void printPortfolio();
+	void resetProcess();
+	void changeSpot(double d, Caltype t);
+	void changeYield(double d, Caltype t);
+	void changeVolatility(double d, Caltype t);
+	double price() { return total_price_; }
+	double delta() { return total_delta_; }
+	double gamma() { return total_gamma_; }
+	double vega() { return total_vega_; }
+	double rho() { return total_rho_; }
+	double theta() { return total_theta_; }
 	~OptionPortfolio();
 
 private:

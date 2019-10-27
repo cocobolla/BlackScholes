@@ -13,6 +13,9 @@ public:
 	void pushPoint(Date d, double rate);
 	std::vector<Date> getDates();
 	double value(Date d);
+	void operator+= (const double d);
+	void operator*= (const double d);
+
 
 private:
 	std::vector<Date> dates_;

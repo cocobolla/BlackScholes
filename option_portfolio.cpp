@@ -24,9 +24,39 @@ void OptionPortfolio::printOption(Option* x) {
 	std::cout << std::string(30, '-') << std::endl;
 }
 
+void OptionPortfolio::initialize() {
+	price_arr_.clear();
+	mc_arr_.clear();
+	bnt_arr_.clear();
+	delta_arr_.clear();
+	gamma_arr_.clear();
+	vega_arr_.clear();
+	rho_arr_.clear();
+	theta_arr_.clear();
+
+	total_price_ = 0;
+	total_delta_ = 0;
+	total_gamma_ = 0;
+	total_vega_ = 0;
+	total_rho_ = 0;
+	total_theta_ = 0;
+}
+
+void OptionPortfolio::resetProcess(){
+	for (unsigned int i = 0; i < option_arr_.size(); i++) {
+		Date expiration = option_arr_[i]->getExpiration();
+		double rf = y_term_.value(expiration);
+		double vol = v_term_.value(expiration);
+		double div = d_term_.value(expiration);
+		GBMProcess process(spot_, rf, div, vol);
+		option_arr_[i]->setProcess(process);
+	}
+}
+
 void OptionPortfolio::calculate() {
 	//TODO Calculate from where the size is different
 	//if (option_arr_.size() != price_arr_.size()) {
+	initialize();
 	double total_price = 0;
 	double total_delta = 0;
 	double total_gamma = 0;
@@ -72,6 +102,54 @@ void OptionPortfolio::calculate() {
 	//}
 }
 
+// Overloading calculate function
+
+void OptionPortfolio::calculate(int num) {
+	//TODO Calculate the target type option.
+	initialize();
+	double total_price = 0;
+	double total_delta = 0;
+	double total_gamma = 0;
+	double total_vega = 0;
+	double total_rho = 0;
+	double total_theta = 0;
+	for (unsigned int i = 0; i < num; i++) {
+		double price = option_arr_[i]->price();
+		double mc = option_arr_[i]->mcprice(10000);
+		double bnt = option_arr_[i]->bntprice(100);
+		double delta = option_arr_[i]->delta();
+		double gamma = option_arr_[i]->gamma();
+		double vega = option_arr_[i]->vega();
+		double rho = option_arr_[i]->rho();
+		double theta = option_arr_[i]->theta();
+
+		price_arr_.push_back(price);
+		mc_arr_.push_back(mc);
+		bnt_arr_.push_back(bnt);
+		delta_arr_.push_back(delta);
+		gamma_arr_.push_back(gamma);
+		vega_arr_.push_back(vega);
+		rho_arr_.push_back(rho);
+		theta_arr_.push_back(theta);
+
+		Position pos = position_arr_[i];
+		int quantity = quantity_arr_[i];
+		int constant = pos * quantity;
+
+		total_price += (price * constant);
+		total_delta += (delta * constant);
+		total_gamma += (gamma * constant);
+		total_vega += (vega * constant);
+		total_rho += (rho * constant);
+		total_theta += (theta * constant);
+	}
+	total_price_ = total_price;
+	total_delta_ = total_delta;
+	total_gamma_ = total_gamma;
+	total_vega_ = total_vega;
+	total_rho_ = total_rho;
+	total_theta_ = total_theta;
+}
 void OptionPortfolio::printPortfolio() {
 	//if (option_arr_.size() != price_arr_.size())
 	calculate();
@@ -109,6 +187,27 @@ void OptionPortfolio::printPortfolio() {
 	std::cout << "Rho = " << total_rho_ << std::endl;
 	std::cout << "Theta= " << total_theta_ << std::endl;
 
+}
+
+void OptionPortfolio::changeSpot(double d, Caltype t) {
+	if (t == Add)
+		spot_ += d;
+	else if (t == Mul)
+		spot_ *= d;
+}
+
+void OptionPortfolio::changeYield(double d, Caltype t) {
+	if (t == Add)
+		y_term_ += d;
+	else if (t == Mul)
+		y_term_ *= d;
+}
+
+void OptionPortfolio::changeVolatility(double d, Caltype t) {
+	if (t == Add)
+		v_term_ += d;
+	else if (t == Mul)
+		v_term_ *= d;
 }
 
 OptionPortfolio::~OptionPortfolio() {
