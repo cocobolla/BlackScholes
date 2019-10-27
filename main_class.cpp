@@ -120,10 +120,10 @@ int main() {
 
 	// Scenario for Rf
 	// Rho +10bp
-	portfolio.changeYield(10/1000, Add);
+	portfolio.changeYield(0.01, Add);
 	portfolio.resetProcess();
 	portfolio.calculate();
-	portfolio.changeYield(-10/1000, Add);
+	portfolio.changeYield(-0.01, Add);
 
 	price = portfolio.price();
 	change_greek = rho_ori * 10/1000;
@@ -131,10 +131,10 @@ int main() {
 		<< change_greek << "\t\t\t" << price - price_ori - change_greek << std::endl;
 
 	// Rho -10bp
-	portfolio.changeYield(-10/1000, Mul);
+	portfolio.changeYield(-0.01, Add);
 	portfolio.resetProcess();
 	portfolio.calculate();
-	portfolio.changeYield(10/1000, Mul);
+	portfolio.changeYield(0.01, Add);
 
 	price = portfolio.price();
 	change_greek = rho_ori * -10/1000;
